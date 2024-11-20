@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/design_default_color_primary"
+        app:titleTextColor="@color/design_default_color_on_primary"
+        app:title="@string/app_description"
+        app:navigationIconTint="@color/design_default_color_on_primary"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+
+        <Button
+            android:id="@+id/selectFileButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="#66BB6A"
+            android:text="@string/select_file" />
+
+        <TextView
+            android:id="@+id/fileSizeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/selected_file_size"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/copyFileButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="#FFEE58"
+            android:textColor="@color/black"
+            android:text="@string/copy_without_buffer" />
+
+        <Button
+            android:id="@+id/copyFileWithBufferButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="#FFA726"
+            android:textColor="@color/black"
+            android:text="@string/copy_with_buffer" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/copyFileWithBufferWithCoroutineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FF5722"
+                android:textColor="@color/white"
+                android:text="@string/copy_with_buffer_in_coroutine" />
+
+            <Button
+                android:id="@+id/stopCopyFileWithBufferWithCoroutineButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:backgroundTint="@color/white"
+                android:textColor="#FF5722"
+                android:text="@string/stop" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/copyWithCancelableStreamButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#009688"
+                android:textColor="@color/white"
+                android:text="@string/copy_with_cancellable_buffer" />
+
+            <Button
+                android:id="@+id/stopCopyWithCancelableStreamButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:backgroundTint="@color/white"
+                android:textColor="#009688"
+                android:text="@string/stop" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/progressText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            tools:text="Прогресс: 0.0" />
+
+
+        <SeekBar
+            android:id="@+id/inputBufferSizeSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:max="524288"
+            android:progress="8192"
+            />
+
+        <TextView
+            android:id="@+id/bufferSizeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reading_buffer_size"
+            android:textAlignment="center" />
+
+
+        <SeekBar
+            android:id="@+id/copyDelaySeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:min="0"
+            android:max="1000"
+            android:progress="0"
+            />
+
+        <TextView
+            android:id="@+id/copyDelayTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/copying_retardation"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:backgroundTint="#C2185B"
+            android:textColor="@android:color/white"
+            android:text="@string/interrupt_copying" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/logView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                tools:text="@string/log_output" />
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

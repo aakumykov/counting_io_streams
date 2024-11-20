@@ -1,0 +1,62 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+}
+
+android {
+    namespace 'com.github.aakumykov.counting_io_streams'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.github.aakumykov.counting_io_streams"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+
+    testImplementation 'org.mockito:mockito-core:4.1.0'
+    androidTestImplementation 'org.mockito:mockito-core:4.1.0'
+    androidTestImplementation 'org.mockito:mockito-android:4.1.0'
+
+    implementation 'com.github.aakumykov:exception_utils:0.4'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
+
+    implementation 'com.github.aakumykov:storage_access_helper:2.0.1-alpha'
+    implementation 'com.github.aakumykov.file_lister_navigator_selector_2:local_file_lister_navigator_selector:10.0.5-alpha'
+}

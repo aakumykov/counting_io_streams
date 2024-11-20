@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">counting_io_streams</string>
+    <string name="app_description">Counting streams</string>
+    <string name="select_file">Выбрать файл</string>
+    <string name="selected_file_size">Размер выбранного файла</string>
+    <string name="copy_without_buffer">Копировать без буфера</string>
+    <string name="copy_with_buffer">Копировать с буфером</string>
+    <string name="copy_with_buffer_in_coroutine">Копировать с буфером в корутне</string>
+    <string name="stop">Стоп</string>
+    <string name="copy_with_cancellable_buffer">Копировать с отменяемым потоком</string>
+    <string name="reading_buffer_size">Размер буфера чтения</string>
+    <string name="copying_retardation">Замедление копирования</string>
+    <string name="interrupt_copying">Прервать копирование</string>
+    <string name="log_output">Вывод лога</string>
+</resources>
