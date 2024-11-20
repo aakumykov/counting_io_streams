@@ -42,7 +42,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation project(':lib')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -58,4 +57,6 @@ dependencies {
 
     implementation 'com.github.aakumykov:storage_access_helper:2.0.1-alpha'
     implementation 'com.github.aakumykov.file_lister_navigator_selector_2:local_file_lister_navigator_selector:10.0.5-alpha'
+
+    implementation 'com.github.aakumykov:counting_io_streams:0.0.2-alpha'
 }

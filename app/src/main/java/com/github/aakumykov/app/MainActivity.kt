@@ -17,6 +17,7 @@ import com.github.aakumykov.app.databinding.ActivityMainBinding
 import com.github.aakumykov.app.extensions.showToast
 import com.github.aakumykov.app.extensions.tag
 import com.github.aakumykov.app.utils.Logger
+import com.github.aakumykov.counting_io_streams.CancelableBufferedInputStream
 import com.github.aakumykov.local_file_lister_navigator_selector.local_file_selector.LocalFileSelector
 import com.github.aakumykov.storage_access_helper.StorageAccessHelper
 import com.gitlab.aakumykov.exception_utils_module.ExceptionUtils
@@ -37,7 +38,7 @@ import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
 
-    private var cancellationMarker: com.github.aakumykov.counting_io_streams.CancelableBufferedInputStream.CancellationMarker? = null
+    private var cancellationMarker: CancelableBufferedInputStream.CancellationMarker? = null
 
     private var workingJob: Job? = null
     private var workingInputStream: InputStream? = null
