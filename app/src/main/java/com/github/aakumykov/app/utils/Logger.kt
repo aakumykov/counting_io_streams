@@ -1,4 +1,4 @@
-package com.github.aakumykov.app
+package com.github.aakumykov.app.utils
 
 import android.util.Log
 import androidx.lifecycle.LiveData

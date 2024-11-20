@@ -13,11 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import com.github.aakumykov.file_lister_navigator_selector.extensions.listenForFragmentResult
 import com.github.aakumykov.file_lister_navigator_selector.file_lister.SimpleSortingMode
 import com.github.aakumykov.file_lister_navigator_selector.file_selector.FileSelector
-import com.github.aakumykov.app.counting_buffered_streams.CoroutineScopedBufferedInputStream
-import com.github.aakumykov.app.counting_buffered_streams.CountingBufferedInputStream
 import com.github.aakumykov.app.databinding.ActivityMainBinding
 import com.github.aakumykov.app.extensions.showToast
 import com.github.aakumykov.app.extensions.tag
+import com.github.aakumykov.app.utils.Logger
 import com.github.aakumykov.local_file_lister_navigator_selector.local_file_selector.LocalFileSelector
 import com.github.aakumykov.storage_access_helper.StorageAccessHelper
 import com.gitlab.aakumykov.exception_utils_module.ExceptionUtils
@@ -38,7 +37,7 @@ import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
 
-    private var cancellationMarker: CancelableBufferedInputStream.CancellationMarker? = null
+    private var cancellationMarker: com.github.aakumykov.counting_io_streams.CancelableBufferedInputStream.CancellationMarker? = null
 
     private var workingJob: Job? = null
     private var workingInputStream: InputStream? = null
@@ -119,19 +118,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun copyWithCancelableStream(){
 
-        cancellationMarker = object: CancelableBufferedInputStream.CancellationMarker {
+        cancellationMarker = object: com.github.aakumykov.counting_io_streams.CancelableBufferedInputStream.CancellationMarker {
             private var _isCancelled: Boolean = false
             override var isCancelled: Boolean
                 get() = _isCancelled
                 set(value) { _isCancelled = value }
         }
 
-        val cancelableInputStream = CancelableBufferedInputStream(
-            inputStream = selectedFileStream,
-            cancellationMarker = cancellationMarker!!
-        ) { bytesReaded ->
-            displayProgress(selectedFile!!.length(), bytesReaded)
-        }
+        val cancelableInputStream =
+            com.github.aakumykov.counting_io_streams.CancelableBufferedInputStream(
+                inputStream = selectedFileStream,
+                cancellationMarker = cancellationMarker!!
+            ) { bytesReaded ->
+                displayProgress(selectedFile!!.length(), bytesReaded)
+            }
 
         thread {
             try {
@@ -158,10 +158,14 @@ class MainActivity : AppCompatActivity() {
     private fun startCopyWithCoroutine() {
         copyingJob = lifecycleScope.launch (Dispatchers.IO) {
             try {
-                val countingInputStream = CoroutineScopedBufferedInputStream(selectedFileStream, this) { count ->
-                    displayProgress(selectedFile!!.length(), count)
+                val countingInputStream =
+                    com.github.aakumykov.counting_io_streams.counting_buffered_streams.CoroutineScopedBufferedInputStream(
+                        selectedFileStream,
+                        this
+                    ) { count ->
+                        displayProgress(selectedFile!!.length(), count)
 //                    Logger.d(TAG, "прочитано: $count / ${selectedFile!!.length()}")
-                }
+                    }
                 countingInputStream.copyTo(outputStream)
             }
             catch (e: Exception) {
@@ -221,10 +225,11 @@ class MainActivity : AppCompatActivity() {
 
         if (isNotReady()) return
 
-        val countingInputStream = CountingInputStream(selectedFileStream) { count ->
-            displayProgress(selectedFile!!.length(), count)
-            TimeUnit.MILLISECONDS.sleep(copyDelay.toLong())
-        }
+        val countingInputStream =
+            com.github.aakumykov.counting_io_streams.CountingInputStream(selectedFileStream) { count ->
+                displayProgress(selectedFile!!.length(), count)
+                TimeUnit.MILLISECONDS.sleep(copyDelay.toLong())
+            }
 
         copyFromStreamToStream(countingInputStream, outputStream)
     }
@@ -234,13 +239,14 @@ class MainActivity : AppCompatActivity() {
 
         if (isNotReady()) return
 
-        val countingInputStream = CountingBufferedInputStream(
-            inputStream = selectedFileStream,
-            bufferSize = readingBufferSize
-        ) { count ->
-            displayProgress(selectedFile!!.length(), count)
-            TimeUnit.MILLISECONDS.sleep(copyDelay.toLong())
-        }
+        val countingInputStream =
+            com.github.aakumykov.counting_io_streams.counting_buffered_streams.CountingBufferedInputStream(
+                inputStream = selectedFileStream,
+                bufferSize = readingBufferSize
+            ) { count ->
+                displayProgress(selectedFile!!.length(), count)
+                TimeUnit.MILLISECONDS.sleep(copyDelay.toLong())
+            }
 
         copyFromStreamToStream(countingInputStream, outputStream)
     }

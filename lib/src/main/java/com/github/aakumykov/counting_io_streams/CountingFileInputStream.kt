@@ -1,4 +1,4 @@
-package com.github.aakumykov.app
+package com.github.aakumykov.counting_io_streams
 
 import android.util.Log
 import java.io.File

@@ -1,4 +1,4 @@
-package com.github.aakumykov.app
+package com.github.aakumykov.app.utils
 
 import java.io.File
 import java.io.FileOutputStream

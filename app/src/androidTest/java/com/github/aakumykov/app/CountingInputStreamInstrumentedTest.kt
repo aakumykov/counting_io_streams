@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.github.aakumykov.app.utils.RandomContentFileCreator
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
@@ -72,9 +73,13 @@ class CountingInputStreamInstrumentedTest {
     @Test
     fun when_copy_zero_size_file_then_callback_calls_only_ones_with_minus_one_argument() {
         prepareRandomFile(0)
-        val callback = Mockito.mock(com.github.aakumykov.app.CountingInputStream.ReadingCallback::class.java)
+        val callback = Mockito.mock(com.github.aakumykov.counting_io_streams.CountingInputStream.ReadingCallback::class.java)
         val countingInputStream =
-            com.github.aakumykov.app.CountingInputStream(inputStream, 8192L, callback)
+            com.github.aakumykov.counting_io_streams.CountingInputStream(
+                inputStream,
+                8192L,
+                callback
+            )
         countingInputStream.copyTo(outputStream)
         verify(callback, Mockito.only()).onReadCountChanged(0)
     }
@@ -84,9 +89,13 @@ class CountingInputStreamInstrumentedTest {
     fun when_copy_file_with_size_equals_buffer_size_then_callback_triggers_once_and_returns_that_size() {
         val size = 8192L
         prepareRandomFile(size.toInt())
-        val callback = Mockito.mock(com.github.aakumykov.app.CountingInputStream.ReadingCallback::class.java)
+        val callback = Mockito.mock(com.github.aakumykov.counting_io_streams.CountingInputStream.ReadingCallback::class.java)
         val countingInputStream =
-            com.github.aakumykov.app.CountingInputStream(inputStream, size, callback)
+            com.github.aakumykov.counting_io_streams.CountingInputStream(
+                inputStream,
+                size,
+                callback
+            )
         countingInputStream.copyTo(outputStream)
         verify(callback, Mockito.atLeast(1)).onReadCountChanged(size)
     }
@@ -96,9 +105,13 @@ class CountingInputStreamInstrumentedTest {
     fun when_copy_file_with_double_buffer_size_then_callback_triggers_once_and_returns_that_size() {
         val size = 8192L * 2
         prepareRandomFile(size.toInt())
-        val callback = Mockito.mock(com.github.aakumykov.app.CountingInputStream.ReadingCallback::class.java)
+        val callback = Mockito.mock(com.github.aakumykov.counting_io_streams.CountingInputStream.ReadingCallback::class.java)
         val countingInputStream =
-            com.github.aakumykov.app.CountingInputStream(inputStream, size, callback)
+            com.github.aakumykov.counting_io_streams.CountingInputStream(
+                inputStream,
+                size,
+                callback
+            )
         countingInputStream.copyTo(outputStream)
         verify(callback, Mockito.atLeast(2)).onReadCountChanged(size)
     }
@@ -113,7 +126,7 @@ class CountingInputStreamInstrumentedTest {
 
 
     private fun prepareRandomFile(size: Int = Random.nextInt(1,1563)) {
-        com.github.aakumykov.app.RandomContentFileCreator.create(randomFilePath, size)
+        RandomContentFileCreator.create(randomFilePath, size)
     }
 
 

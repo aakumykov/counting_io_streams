@@ -1,4 +1,4 @@
-package com.github.aakumykov.app.counting_buffered_streams
+package com.github.aakumykov.counting_io_streams.counting_buffered_streams
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
