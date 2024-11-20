@@ -8,12 +8,12 @@ project.ext {
     artifactId = 'counting_io_streams'
     groupId = 'com.github.aakumykov'
 
-    majorVersionNum = commonMajorVersionNumber
-    minorVersionNum = commonMinorVersionNumber
-    patchVersionNum = commonPatchVersionNumber
-    suffix = commonVersionSuffix
+    majorVersionNum = 0
+    minorVersionNum = 0
+    patchVersionNum = 2
+    suffix = '-alpha'
 
-    versionCode = commonVersionCode
+    versionCode = 2
 
     versionName = majorVersionNum + "." + minorVersionNum + "." + patchVersionNum + "-" + suffix
 }
@@ -53,15 +53,12 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-
-    implementation 'com.github.aakumykov:counting_io_streams:406d4a41ac'
 }
 
 publishing {
