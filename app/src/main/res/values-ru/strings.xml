@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">counting_io_streams</string>
+    <string name="app_name">Counting IO-streams демо</string>
     <string name="app_description">Считаемые потоки</string>
     <string name="select_file">Выбрать файл</string>
     <string name="selected_file_size">Размер выбранного файла</string>

@@ -201,10 +201,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun prepareBufferSizeSeekBar() {
+        binding.inputBufferSizeSeekBar.apply {
+            max = MAX_READING_BUFFER_SIZE
+            progress = DEFAULT_READING_BUFFER_SIZE
+        }
+
         binding.inputBufferSizeSeekBar.setOnSeekBarChangeListener(object: SeekBar. OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser)
-                    displayReadingBufferSize(progress)
+                if (fromUser) {
+                    var progressValue = progress
+
+                    if (progress < MIN_READING_BUFFER_SIZE) {
+                        progressValue = MIN_READING_BUFFER_SIZE
+                        binding.inputBufferSizeSeekBar.progress = progressValue
+                    }
+
+                    displayReadingBufferSize(progressValue)
+                }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
@@ -371,6 +384,10 @@ class MainActivity : AppCompatActivity() {
         val TAG: String = MainActivity::class.java.simpleName
         const val KEY_FILE_SELECTION = "KEY_FILE_SELECTION"
         const val COPYING_STEP_DELAY: Long = 500
+
+        const val DEFAULT_READING_BUFFER_SIZE = 8192
+        const val MAX_READING_BUFFER_SIZE = 81920
+        const val MIN_READING_BUFFER_SIZE = 1
     }
 
 

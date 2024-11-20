@@ -134,8 +134,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:max="524288"
-            android:progress="8192"
+            tools:max="81920"
+            tools:progress="8192"
             />
 
         <TextView

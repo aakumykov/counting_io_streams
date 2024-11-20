@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">counting_io_streams</string>
+    <string name="app_name">Counting IO-streams demo</string>
     <string name="app_description">Counting streams</string>
     <string name="select_file">Select a file</string>
     <string name="selected_file_size">Selected file size</string>
