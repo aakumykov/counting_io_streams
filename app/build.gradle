@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.github.aakumykov.counting_io_streams'
+    namespace 'com.github.aakumykov.app'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.github.aakumykov.counting_io_streams"
+        applicationId "com.github.aakumykov.app"
         minSdk 21
         targetSdk 34
         versionCode 1
@@ -24,11 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     buildFeatures {
         viewBinding true
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "counting_io_streams"
+include ':lib'
 include ':app'
