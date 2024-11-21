@@ -7,7 +7,7 @@ import kotlin.jvm.Throws
 class CountingInputStream(
     private val inputStream: InputStream,
     private val callbackTriggeringIntervalBytes: Long = 8192L,
-    private val readingCallback: ReadingCallback,
+    private var readingCallback: ReadingCallback? = null,
 ) : InputStream() {
 
     private var readedBytesCount: Long = 0
@@ -15,6 +15,14 @@ class CountingInputStream(
 
     @Throws(IOException::class)
     override fun read(): Int {
+        return inputStream.read().let { justReadByte ->
+            summarizeAndCallBack(justReadByte)
+            justReadByte
+        }
+    }
+
+    @Throws(IOException::class)
+    fun read(readingCallback: ReadingCallback): Int {
         return inputStream.read().let { justReadByte ->
             summarizeAndCallBack(justReadByte)
             justReadByte
