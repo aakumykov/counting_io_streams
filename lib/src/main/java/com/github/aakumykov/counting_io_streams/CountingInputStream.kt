@@ -23,6 +23,7 @@ class CountingInputStream(
 
     @Throws(IOException::class)
     fun read(readingCallback: ReadingCallback): Int {
+        this.readingCallback = readingCallback
         return inputStream.read().let { justReadByte ->
             summarizeAndCallBack(justReadByte)
             justReadByte
@@ -53,7 +54,7 @@ class CountingInputStream(
     }
 
     private fun invokeCallback() {
-        readingCallback.onReadCountChanged(readedBytesCount)
+        readingCallback?.onReadCountChanged(readedBytesCount)
     }
 
 
