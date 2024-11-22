@@ -8,12 +8,12 @@ project.ext {
     artifactId = 'counting_io_streams'
     groupId = 'com.github.aakumykov'
 
-    majorVersionNum = commonMajorVersionNumber
-    minorVersionNum = commonMinorVersionNumber
-    patchVersionNum = commonPatchVersionNumber
-    suffix = commonVersionSuffix
+    majorVersionNum = 0
+    minorVersionNum = 0
+    patchVersionNum = 2
+    suffix = "alpha"
 
-    versionCode = commonVersionCode
+    versionCode = 2
 
     versionName = majorVersionNum + "." + minorVersionNum + "." + patchVersionNum + "-" + suffix
 }

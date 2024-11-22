@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
+/*buildscript {
     ext {
         commonMajorVersionNumber = 0
         commonMinorVersionNumber = 0
@@ -7,7 +7,7 @@ buildscript {
         commonVersionSuffix = "alpha"
         commonVersionCode = 1
     }
-}
+}*/
 
 plugins {
     id 'com.android.application' version '8.5.1' apply false
