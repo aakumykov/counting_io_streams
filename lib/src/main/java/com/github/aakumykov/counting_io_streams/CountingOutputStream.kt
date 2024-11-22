@@ -21,7 +21,7 @@ class CountingOutputStream(
 
 
     @Throws(IOException::class)
-    fun write(b: ByteArray, offset: Int, len: Int, callback: WritingCallback) {
+    fun write(b: ByteArray, offset: Int, len: Int, callback: WritingCallback? = null) {
         this.callback = callback
         outputStream.write(b, offset, len)
     }

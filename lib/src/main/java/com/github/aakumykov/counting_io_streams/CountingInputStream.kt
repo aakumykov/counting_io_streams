@@ -22,7 +22,7 @@ class CountingInputStream(
     }
 
     @Throws(IOException::class)
-    fun read(readingCallback: ReadingCallback): Int {
+    fun read(readingCallback: ReadingCallback? = null): Int {
         this.readingCallback = readingCallback
         return inputStream.read().let { justReadByte ->
             summarizeAndCallBack(justReadByte)
